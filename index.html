@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +15,114 @@
     <title>Web App</title>
 </head>
 <body>
-        
+    <!--  -->
+    <div id="app">
+        <!-- Landing Page of the web store -->
+        <!-- Page where all lessons to be purchased are stored -->
+        <div v-if="page === 'content'">
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-dark bg-dark">
+                <div class="container-fluid" v-if="this.cart.length > 0">
+                    <!-- Cart Button -->
+                    <a class="storeCart d-lg-flex"><button v-on:click="navigateTo('orders')">
+                            {{ cartItems }}<i class="fas fa-shopping-cart"></i></button></a>
+                </div>
+                <div class="container-fluid" v-else>
+                    <a class="storeCart d-lg-flex"><button disabled>
+                            {{ cartItems }}<i class="fas fa-shopping-cart"></i></button></a>
+                </div>
+            </nav>
+            <!-- Body of the landing page -->
+            <section id="section">
+                <div class="container">
+                    <br />
+                    <div>
+                        <!-- Search Feature -->
+                        <div id="searchWrapper">
+                            <input type="text" v-model="search" id="searchBar" placeholder="search for a subject" />
+                        </div>
+                        <!-- Lessons to be Purchased -->
+                        <div class="row g-4" id="card">
+                            <div class="content col-lg-4 col-sm-6" v-for="lesson in filteredLessons" :key="lesson.id">
+                                <div class="lessonForm">
+                                    <!-- Images of the different lessons to be purchased -->
+                                    <div class="mt-4 mb-2">
+                                        <img v-bind:src="lesson.images" style="height: 50%; width: 100%" />
+                                    </div>
+                                    <!-- Lesson Properties to be Purchased -->
+                                    <div class="content mt-4 mb-2">
+                                        <p><strong>Subject: </strong>{{lesson.subject}}</p>
+                                        <p><strong>Location: </strong>{{lesson.location}}</p>
+                                        <p><strong>Price: </strong>£{{lesson.price}}.00</p>
+                                        <p>
+                                            <strong>Stock: </strong>{{lesson.spaces - cartSpace(lesson)}}
+                                        </p>
+                                    </div>
+                                    <!-- Add to Cart Button -->
+                                    <div class="button" v-if="canaddtocart(lesson)">
+                                        <button class="btn btn-outline-success" id="add" v-on:click="addtocart(lesson)">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                    <div class="button" v-else>
+                                        <button class="btn btn-outline-success" id="add" disabled>
+                                            Out of Stock
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Landing Page ends -->
+
+
+        <!-- Cart Page of the web store -->
+        <!-- Page where all lessons purchased are stored -->
+        <div v-if="page === 'orders'">
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <!-- Cart Button -->
+                    <a class="storeCart d-lg-flex"><button v-on:click="navigateTo('content')">{{ cartItems }}<i class="fas fa-shopping-cart"></i></button></a>
+                </div>
+            </nav>
+            <!-- Body of the Cart Page -->
+            <section id="section">
+                <div class="container">
+                    <br />
+                    <!-- Lessons Purchased -->
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-sm-6" v-for="lesson in cart">
+                            <div class="content lessonForm">
+                                <!-- Images of the different lessons purchased -->
+                                <div class="mt-4 mb-2">
+                                    <img v-bind:src="lesson.images" style="height: 50%; width: 100%" />
+                                </div>
+                                <!-- Lesson Properties Purchased -->
+                                <div class="content mt-4 mb-2">
+                                    <p><strong>Subject: </strong>{{lesson.subject}}</p>
+                                    <p><strong>Location: </strong>{{lesson.location}}</p>
+                                    <p><strong>Price: </strong>£{{lesson.price}}.00</p>
+                                </div>
+                                <!-- Remove from Cart Button -->
+                                <div class="button">
+                                    <button class="btn btn-outline-success" id="add" v-on:click="removefromcart(lesson.id)">
+                                        Reverse order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="lessons.js"></script>
+    <script src="app.js"></script>
+
 </body>
 </html>
