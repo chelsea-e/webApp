@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+:root {
+    --body-font: "Cabin", sans-serif;
+    --body-font-color: #515151;
+    --box-shadow: 10px 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: var(--body-font);
+    font-size: 9px;
+    color: var(--body-font-color);
+}
+
+p {
+    font-size: 1.6rem;
+}
+
+.lessonForm {
+    box-shadow: var(--box-shadow);
+    background-color: #fff;
+    padding: 25px;
+}
