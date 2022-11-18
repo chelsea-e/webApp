@@ -28,7 +28,7 @@ var lessons =  [
     },
     {
       id: 4,
-      subject: "Art & Crafts",
+      subject: "Art",
       location: "Paris",
       price: 45,
       spaces: 5,
@@ -37,7 +37,7 @@ var lessons =  [
     },
     {
       id: 5,
-      subject: "Nutritional Science",
+      subject: "Nutrition",
       location: "Italy",
       price: 30,
       spaces: 5,
@@ -47,7 +47,7 @@ var lessons =  [
     {
       id: 6,
       subject: "Chemistry",
-      location: "Washington DC",
+      location: "Ohio",
       price: 65,
       spaces: 5,
       icon: "fas fa-atom",
@@ -65,7 +65,7 @@ var lessons =  [
     {
       id: 8,
       subject: "Accounting",
-      location: "New York",
+      location: "Texas",
       price: 100,
       spaces: 5,
       icon: "fas fa-money-bill-alt",
