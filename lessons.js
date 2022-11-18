@@ -30,7 +30,7 @@ var lessons =  [
       id: 4,
       subject: "Art",
       location: "Paris",
-      price: 45,
+      price: 50,
       spaces: 5,
       icon: "fas fa-paint-brush",
       images: "img/4.jpeg"
