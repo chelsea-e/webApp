@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Cabin|Herr+Von+Muellerhoff|Source+Sans+Pro:400,900&display=swap");
 
 :root {
-    --body-font: "Cabin", sans-serif;
-    --body-font-color: #515151;
-    --box-shadow: 10px 8px 25px rgba(0, 0, 0, 0.1);
+  --body-font: "Cabin", sans-serif;
+  --body-font-color: #515151;
+  --box-shadow: 10px 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 html {
@@ -14,44 +14,206 @@ html {
 }
 
 p {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
 
 .lessonForm {
-    box-shadow: var(--box-shadow);
-    background-color: #fff;
-    padding: 25px;
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+  padding: 25px;
 }
 
-.content {
-    text-align: center;
+.content{
+  text-align: center;
 }
 
-#add {
-    width: 90px;
-    height: 26px;
-    padding: 4px;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    transition: color 0.5s;
+#add{
+  width: 90px;
+  height: 26px;
+  padding: 4px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  transition: color 0.5s;
 }
 
 #searchBar {
+  width: 100%;
+  height: 38px;
+  border-radius: 100vh;
+  border: 1px solid #646262;
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+#searchBox {
+  position: relative;
+}
+
+#searchBox::after {
+  content: '🔍';
+  position: absolute;
+  top: 13px;
+  right: 20px;
+}
+
+.display-4{
+  font-family: 'Cabin', sans-serif;;
+}
+
+.display-6{
+  font-family: 'Cabin', sans-serif;
+}
+
+#alignText{
+  font-size: 21px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.col label{
+  position: relative;
+  color: #646262;
+  font-family: 'Cabin', sans-serif;
+  font-size: 16px;
+  border: 2px solid #646262;
+  border-radius: 6px;
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.col label::before{
+  content: "";
+  height: 20px;
+  width: 20px;
+  border: 3px solid #646262;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+input[type="radio"]:checked + label{
+    background-color: #646262;
+    color: white;
+}
+
+input[type="radio"]:checked + label::before{
+  height: 16px;
+  width: 16px;
+  border: 10px solid white;
+  background: #646262;
+  transition: 0.3s ease-in;
+}
+
+span {
+  font-size: 2.0rem;
+  text-transform: uppercase;
+}
+
+.user-details .input-box{
+  height: 50px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.user-details .input-box input{
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  background: #f0f1f8;
+  border-radius: 6px;
+  padding: 0 15px;
+  resize: none;
+}
+
+.user-details .button{
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.user-details button[type="submit"] {
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #3d412d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-bottom: 1px solid rgb(0, 0, 6);
+}
+
+input[type="tel"]:focus,
+textarea:focus {
+  border-bottom: 1px solid rgb(0, 0, 6);
+}
+
+button[type="submit"]:hover {
+  background: #12643e;
+}
+
+#name-error{
+  font-family: 'Cabin', sans-serif;
+  font-size: 14px;
+}
+
+#phone-error{
+  font-family: 'Cabin', sans-serif;
+  font-size: 14px;
+}
+
+@media (max-width: 950px) {
+  .user-details {
+    width: 75%;
+    margin-left: 55px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 820px) {
+  .user-details {
     width: 100%;
-    height: 32px;
-    border-radius: 3px;
-    border: 1px solid #eaeaea;
-    padding: 5px 10px;
-    font-size: 12px;
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
 
-#searchWrapper {
-    position: relative;
+@media (min-width: 650px) {
+  .user-details {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
 
-#searchWrapper::after {
-    content: '🔍';
-    position: absolute;
-    top: 7px;
-    right: 15px;
+@media (max-width: 700px) {
+  .row .content {
+    max-width: 600px;
+  }
+  .row .content {
+    padding: 7px 15px;
+  }
+}
+
+@media (min-width: 400px) {
+  .row .content {
+    margin: 8px 0px;
+  }
+}
+
+@media (max-width: 800px) {
+  .row .content {
+    margin: 30px auto;
+  }
 }
