@@ -1,51 +1,140 @@
 const app = new Vue({
-    el: '#app',
+    el: "#app",
     data: {
-        page: "content",
-        lessons: lessons,
-        sorting: "price",
-        cart: [],
-        search: ''
+      page: "content",
+      lessons: lessons,
+      sorting: "price",
+      cart: [],
+      search: "",
+      name: "",
+      phone: "",
+      error: {
+        name: "",
+        phone: "",
+      },
+      disabled: [true, true],
+      sortOption: "",
+      orderOption: "",
     },
     methods: {
-        addtocart(lesson) {
-            this.cart.push(lesson)
-        },
-        removefromcart(id) {
-            const index = this.cart.findIndex((item) => item.id === id);
-            this.cart.splice(index, 1)
-            if (this.cart.length == 0) {
-                this.page = 'content'
-            }
-        },
-        canaddtocart(lesson) {
-            return lesson.spaces > this.cartSpace(lesson)
-        },
-        cartSpace(lesson) {
-            let x = 0;
-            for (var i = 0; i < this.cart.length; i++) {
-                if (this.cart[i] == lesson) {
-                    x++;
-                }
-            }
-            return x;
-        },
-        navigateTo(page) {
-            this.page = page;
+      addtocart(lesson) {
+        this.cart.push(lesson);
+      },
+      removefromcart(id) {
+        const index = this.cart.findIndex((item) => item.id === id);
+        this.cart.splice(index, 1)
+        if (this.cart.length == 0) {
+          this.page = 'content'
         }
+      },
+      canaddtocart(lesson) {
+        return lesson.spaces > this.cartSpace(lesson);
+      },
+      cartSpace(lesson) {
+        let x = 0;
+        for (var i = 0; i < this.cart.length; i++) {
+          if (this.cart[i] == lesson) {
+            x++;
+          }
+        }
+        return x;
+      },
+      navigateTo(page) {
+        this.page = page;
+      },
+  
+      validateName(value) {
+        if (!value) {
+          this.error["name"] = "Your name cannot be left empty";
+          this.disabled = [true, this.disabled[1]];
+        } else if (!/^[A-Za-z\s]*$/.test(value)) {
+          this.error["name"] = "Your name must contain only letters";
+          this.disabled = [true, this.disabled[1]];
+        } else {
+          this.error["name"] = "";
+          this.disabled = [false, this.disabled[1]];
+        }
+      },
+      validatePhone(value) {
+        if (!value) {
+          this.error["phone"] = "Your phone number cannot be left empty";
+          this.disabled = [this.disabled[1], true];
+        } else if (!/^[0-9]*$/ || !/^[0-9]{11}$/.test(value)){
+          this.error["phone"] = "Only 11 digits are valid";
+          this.disabled = [this.disabled[1], true];
+        } else {
+          this.error["phone"] = "";
+          this.disabled = [this.disabled[1], false];
+        }
+      },
+      checkout() {
+        alert("Your order has been successfully submitted");
+  
+        this.cart = [];
+  
+        this.navigateTo("content");
+      },
     },
     computed: {
-        cartItems: function () {
-            return this.cart.length || "";
-        },
-        filteredLessons: function () {
-            if (this.search) {
-                return this.lessons.filter((lesson) => {
-                    return lesson.subject.toLowerCase().match(this.search.toLowerCase()) || lesson.location.toLowerCase().match(this.search.toLowerCase())
-                });
-            }
-
-            return this.lessons
+      cartItems: function () {
+        return this.cart.length || "";
+      },
+      filteredLessons() {
+        let tempLessons = this.lessons;
+  
+        if (this.search != "" && this.search) {
+          tempLessons = tempLessons.filter((item) => {
+            return (
+              item.subject.toLowerCase().includes(this.search.toLowerCase()) ||
+              item.location.toLowerCase().includes(this.search.toLowerCase())
+            );
+          });
         }
+  
+        tempLessons = tempLessons.sort((a, b) => {
+          if (this.sortOption == "subject") {
+            let fa = a.subject.toLowerCase(),
+              fb = b.subject.toLowerCase();
+  
+            if (fa < fb) {
+              return -1;
+            }
+            if (fa > fb) {
+              return 1;
+            }
+            return 0;
+          } else if (this.sortOption == "location") {
+            let fa = a.location.toLowerCase(),
+              fb = b.location.toLowerCase();
+  
+            if (fa < fb) {
+              return -1;
+            }
+            if (fa > fb) {
+              return 1;
+            }
+            return 0;
+          } else if (this.sortOption == "price") {
+            return a.price - b.price;
+          } else if (this.sortOption == "stock") {
+            return a.spaces - b.spaces;
+          }
+        });
+  
+        if (this.orderOption === "desc") {
+          tempLessons.reverse();
+        }
+  
+        return tempLessons;
+      },
     },
-});
+    watch: {
+      name(value) {
+        this.validateName(value);
+      },
+      phone(value) {
+        this.validatePhone(value);
+      },
+    },
+  });
+  
